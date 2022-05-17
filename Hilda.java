@@ -10,6 +10,7 @@ public class Hilda {
     //Stats and other variables:
     String hildaName = "Hilda";
     //basic stats:
+    int hildaLevel = 10;
     int hildaHP = 300;
     int hildaMaxHP = 0;
     int hildaMP = 0;
@@ -18,7 +19,7 @@ public class Hilda {
     int hildaAgility = 0;
     int hildaIntelligence = 0;
     int hildaStamina = 0;
-    int hildaLuck = 0;
+    int hildaLuck = 13;
     int hildaAttack = 0;
     int hildaAccuracy = 15;
     int hildaDefense = 0;
@@ -46,6 +47,7 @@ public class Hilda {
         hildaSprite.fillRect(5 + hildaXPos, 73 + hildaYPos, 5, 15);
     }
     */
+    //ATTACKS
     public void hildaAttack(Enemy enemy, Random battle_hit_limit) {
         System.out.println(hildaName + " attacks!");
         int maybe_hit = battle_hit_limit.nextInt(101);
@@ -53,20 +55,30 @@ public class Hilda {
             enemy.enemyTakeAttack(hildaStrength/2 + 5, battle_hit_limit);
         }
         else {
-            System.out.println(hildaName + " misses!");
+            System.out.println(hildaName + " misses! \n");
         }
     }
     public void hildaTakeAttack(int HPtaken, Random battle_hit_limit) {
         int maybe_miss = battle_hit_limit.nextInt(101);
         if (maybe_miss <= hildaAccuracy) {
             hildaHP -= HPtaken;
-            System.out.println(hildaName + " loses " + HPtaken + " health points! \n\n");
+            System.out.println(hildaName + " loses " + HPtaken + " health points! \n");
         }
         else {
-            System.out.println(hildaName + " dodges!");
+            System.out.println(hildaName + " dodges! \n");
         }
     }
-}
-class trollHilda extends Hilda {
-    
+    //FLEE
+    public boolean hildaFlee(Random battle_flee_limit) {
+        System.out.println(hildaName + " tries to run for it!");
+        int maybe_flee = battle_flee_limit.nextInt(hildaLevel + 16);
+        if (hildaLuck >= maybe_flee) {
+            System.out.println(hildaName + " was able to escape!");
+            return true;
+        }
+        else {
+            System.out.println(hildaName + " was not able to escape. \n");
+            return false;
+        }
+    }
 }
