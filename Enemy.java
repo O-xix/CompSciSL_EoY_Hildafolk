@@ -28,13 +28,26 @@ public class Enemy {
     int enemyDarkAff;
     int enemyGravityAff;
     int enemyDrainAff;
-    
+
     public void enemyAttack(Hilda hilda, Random battle_hit_limit) {
         System.out.println("The " + name_type + " attacks!");
-        hilda.hildaTakeAttack(enemyStrength/2 + 5, battle_hit_limit);
+        int maybe_hit = battle_hit_limit.nextInt(101);
+        if (maybe_hit <= enemyAccuracy) {
+            hilda.hildaTakeAttack(enemyStrength/2 + 5, battle_hit_limit);
+        }
+        else {
+            System.out.println("The " + name_type + " misses!");
+            System.out.println("\n");
+        }
     }
     public void enemyTakeAttack(int HPtaken, Random battle_hit_limit) {
-        enemyHP -= HPtaken;
-        System.out.println("The " + name_type + " loses " + HPtaken + " health points! \n\n");
+        int maybe_miss = battle_hit_limit.nextInt(101);
+        if (maybe_miss <= enemyAccuracy) {
+            enemyHP -= HPtaken;
+            System.out.println("The " + name_type + " loses " + HPtaken + " health points! \n");
+        }
+        else {
+            System.out.println("The " + name_type + " dodges! \n");
+        }
     }
 }
