@@ -22,7 +22,7 @@ public class Hilda {
     int hildaLuck = 13;
     int hildaAttack = 0;
     int hildaAccuracy = 15;
-    int hildaDefense = 0;
+    int hildaDefense = 100;
     int hildaEvasion = 48;
     //spell-affinities
     int enemyFireAff;
@@ -34,6 +34,15 @@ public class Hilda {
     int enemyDarkAff;
     int enemyGravityAff;
     int enemyDrainAff;
+    //item list
+    ArrayList<String> hildaItemList = new ArrayList<String>();
+    ArrayList<int> hildaItemListQuantity = new ArrayList<int>();
+    hildaItemList.add("Potion");
+    hildaItemListQuantity.add(5);
+    hildaItemList.add("Elixir");
+    hildaItemListQuantity.add(3);
+    hildaItemList.add("Hi-Potion");
+    hildaItemListQuantity.add(1);
     /*
     public void hildaSpriteRefresh(DrawingPanel panel, int hildaXPos, int hildaYPos) {
         Graphics hildaSprite = panel.getGraphics();
@@ -67,6 +76,15 @@ public class Hilda {
         else {
             System.out.println(hildaName + " dodges! \n");
         }
+    }
+    //ITEMS
+    public boolean hildaItems(Scanner item_navi_input) {
+        for (int i = 0; i < hildaItemList.size(); i++) {
+            System.out.println(hildaItemList.get(i) + " :  " + hildaItemListQuantity.get(i));
+        }
+        System.out.println("\n" + "What item would you like to use? ");
+        String item_input = item_navi_input.nextLine();
+        if (item_input)
     }
     //FLEE
     public boolean hildaFlee(Random battle_flee_limit) {
