@@ -34,17 +34,28 @@ public class Main {
             if(battle_command.equals("FIGHT")) {
                 hilda.hildaAttack(enemy, battle_random);
             }
+            else if(battle_command.equals("MAGIC")) {
+                
+            }
+            else if(battle_command.equals("DEFEND")) {
+                
+            }
+            else if(battle_command.equals("ITEMS")) {
+                hilda.hildaItems(battle_input);
+            }
             else if(battle_command.equals("FLEE")) {
                 fleed = hilda.hildaFlee(battle_random);
                 if (fleed = true) {
-                    break;FLEE
+                    break;
+                }
+                else {
+                    continue;
                 }
             }
             else {
                 System.out.println("Error.");
                 continue;
             }
-
             //Enemy attack
             enemy.enemyAttack(hilda, battle_random);
         }
