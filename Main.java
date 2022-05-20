@@ -21,6 +21,7 @@ public class Main {
     public static void battle(Hilda hilda, Enemy enemy) {
         Scanner battle_input = new Scanner(System.in);
         Random battle_random = new Random();
+        String escape_menu = "";
         System.out.println("The " + enemy.name_type + " nearly stepped on you! \n");
         boolean fleed = false;
         while (enemy.enemyHP > 0 && fleed == false) {
@@ -41,7 +42,10 @@ public class Main {
                 
             }
             else if(battle_command.equals("ITEMS")) {
-                hilda.hildaItems(battle_input);
+                escape_menu = hilda.hildaItems(battle_input);
+                if (escape_menu.equals("ESCAPE")) {
+                    continue;
+                }
             }
             else if(battle_command.equals("FLEE")) {
                 fleed = hilda.hildaFlee(battle_random);
