@@ -24,16 +24,16 @@ public class Hilda {
     int hildaAccuracy = 15;
     int hildaDefense = 100;
     int hildaEvasion = 48;
-    //spell-affinities
-    int enemyFireAff;
-    int enemyIceAff;
-    int enemyLightningAff;
-    int enemyEarthAff;
-    int enemyWindAff;
-    int enemyWaterAff;
-    int enemyDarkAff;
-    int enemyGravityAff;
-    int enemyDrainAff;
+    //spell-affinities; the greater the number, the harder the hit.
+    int hildaFireAff = 110;
+    int hildaIceAff;
+    int hildaLightningAff;
+    int hildaEarthAff;
+    int hildaWindAff;
+    int hildaWaterAff;
+    int hildaDarkAff;
+    int hildaGravityAff;
+    int hildaDrainAff;
     //item list
     ArrayList<String> hildaItemList = new ArrayList<String>();
     ArrayList<int> hildaItemListQuantity = new ArrayList<int>();
@@ -43,6 +43,15 @@ public class Hilda {
     hildaItemListQuantity.add(3);
     hildaItemList.add("Hi-Potion");
     hildaItemListQuantity.add(1);
+    //magic list
+    ArrayList<String> hildaMagicList = new ArrayList<String>();
+    ArrayList<String> hildaMagicListType = new ArrayList<String>();
+    hildaMagicList.add("Lindworm");
+    hildaMagicListType.add("Fire");
+    hildaMagicList.add("Greela");
+    hildaMagicListType.add("Ice");
+    hildaMagicList.add("Kraken");
+    hildaMagicListType.add("Water");
     /*
     public void hildaSpriteRefresh(DrawingPanel panel, int hildaXPos, int hildaYPos) {
         Graphics hildaSprite = panel.getGraphics();
@@ -69,7 +78,7 @@ public class Hilda {
     }
     public void hildaTakeAttack(int HPtaken, Random battle_hit_limit) {
         int maybe_miss = battle_hit_limit.nextInt(101);
-        if (maybe_miss <= hildaAccuracy) {
+        if (maybe_miss <= hildaEvasion) {
             hildaHP -= HPtaken;
             System.out.println(hildaName + " loses " + HPtaken + " health points! \n");
         }
@@ -77,6 +86,53 @@ public class Hilda {
             System.out.println(hildaName + " dodges! \n");
         }
     }
+    
+    //MAGIC
+    public void hildaMagicAttack(String summon, Enemy enemy, Random battle_hit_limit) {
+        Boolean found_summon = false;
+        while (found_summon == false) {
+            if(hildaMagicList.contains(summon)) {
+                System.out.println(hildaName + " calls out to " + summon + "!");
+                String magic_type = hildaMagicListType.get(hildaMagicList.index(summon));
+                int maybe_hit = battle_hit_limit.nextInt(101);
+                if (maybe_hit <= hildaAccuracy) {
+                    enemy.enemyTakeMagicAttack(magic_type, hildaStrength/2 + 5, battle_hit_limit);
+                }
+                else {
+                    System.out.println(hildaName + " & " + summon + " miss! \n");
+                }
+            }
+            else {
+                System.out.println("Hilda doesn't know who you're looking for, but they're not here. ");
+            }
+        }
+    }
+    public void hildaTakeMagicAttack(String magic_type, int HPtaken, Random battle_hit_limit) {
+        int maybe_miss = battle_hit_limit.nextInt(101);
+        int magic_affinity;
+        //find magic_affinity factor
+        if(magic_type.equals("Fire")) {
+            magic_affinity = hildaFireAff;
+        }
+        else if(magic_type.equals("Water")) {
+            magic_affinity = hildaWaterAff;
+        }
+        else if(magic_type.equals("Ice")) {
+            magic_affinity = hildaFireAff;
+        }
+        else {
+            System.out.println("Error.");
+        }
+        //actual damage
+        if (maybe_miss <= hildaEvasion) {
+            enemyHP -= ((HPtaken * magic_affinity)/100);
+            System.out.println("The " + name_type + " loses " + HPtaken + " health points! \n");
+        }
+        else {
+            System.out.println("The " + name_type + " dodges! \n");
+        }
+    }
+    
     //ITEMS
     public boolean hildaItems(Scanner item_navi_input) {
         for (int i = 0; i < hildaItemList.size(); i++) {
@@ -84,7 +140,7 @@ public class Hilda {
         }
         System.out.println("\n" + "What item would you like to use? ");
         String item_input = item_navi_input.nextLine();
-        if (item_input)
+        if (item_input.equals(""))
     }
     //FLEE
     public boolean hildaFlee(Random battle_flee_limit) {
