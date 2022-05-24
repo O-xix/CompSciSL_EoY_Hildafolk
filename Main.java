@@ -36,10 +36,12 @@ public class Main {
                 hilda.hildaAttack(enemy, battle_random);
             }
             else if(battle_command.equals("MAGIC")) {
-                
-            }
-            else if(battle_command.equals("DEFEND")) {
-                
+                for (int i = 0; i < hilda.hildaMagicList.size(); i++) {
+                    System.out.println(hilda.hildaMagicList.get(i) + " :  " + hilda.hildaMagicListType.get(i));
+                }
+                System.out.println("\n" + "Who would you like to call on? ");
+                String item_input = item_navi_input.nextLine();
+                hilda.hildaMagicAttack(item_input, enemy, battle_random);
             }
             else if(battle_command.equals("ITEMS")) {
                 escape_menu = hilda.hildaItems(battle_input);
