@@ -26,32 +26,36 @@ public class Hilda {
     int hildaEvasion = 48;
     //spell-affinities; the greater the number, the harder the hit.
     int hildaFireAff = 110;
-    int hildaIceAff;
+    int hildaIceAff = 100;
     int hildaLightningAff;
     int hildaEarthAff;
     int hildaWindAff;
-    int hildaWaterAff;
+    int hildaWaterAff = 100;
     int hildaDarkAff;
     int hildaGravityAff;
     int hildaDrainAff;
-    //item list
-    ArrayList<String> hildaItemList = new ArrayList<String>();
-    ArrayList<int> hildaItemListQuantity = new ArrayList<int>();
-    hildaItemList.add("Potion");
-    hildaItemListQuantity.add(5);
-    hildaItemList.add("Elixir");
-    hildaItemListQuantity.add(3);
-    hildaItemList.add("Hi-Potion");
-    hildaItemListQuantity.add(1);
-    //magic list
-    ArrayList<String> hildaMagicList = new ArrayList<String>();
-    ArrayList<String> hildaMagicListType = new ArrayList<String>();
-    hildaMagicList.add("Lindworm");
-    hildaMagicListType.add("Fire");
-    hildaMagicList.add("Greela");
-    hildaMagicListType.add("Ice");
-    hildaMagicList.add("Kraken");
-    hildaMagicListType.add("Water");
+    //lists:
+    ArrayList<String> hildaItemList = new ArrayList<>(); 
+    ArrayList<int> hildaItemListQuantity = new ArrayList<>();
+    ArrayList<String> hildaMagicList = new ArrayList<>();
+    ArrayList<int> hildaMagicListType = new ArrayList<>();
+    //set item list and magic list
+    public void hildaItemsGive() {
+        //item list give
+        hildaItemList.set(0, "Potion");
+        hildaItemListQuantity.set(0, 5);
+        hildaItemList.set(1, "Elixir");
+        hildaItemListQuantity.set(1, 3);
+        hildaItemList.set(2, "Hi-Potion");
+        hildaItemListQuantity.set(2, 1);
+        //magic list give
+        hildaMagicList.set(0, "Lindworm");
+        hildaMagicListType.set(0, "Fire");
+        hildaMagicList.set(1, "Greela");
+        hildaMagicListType.set(1, "Ice");
+        hildaMagicList.set(2, "Kraken");
+        hildaMagicListType.set(2, "Water");
+    }
     /*
     public void hildaSpriteRefresh(DrawingPanel panel, int hildaXPos, int hildaYPos) {
         Graphics hildaSprite = panel.getGraphics();
@@ -118,7 +122,7 @@ public class Hilda {
             magic_affinity = hildaWaterAff;
         }
         else if(magic_type.equals("Ice")) {
-            magic_affinity = hildaFireAff;
+            magic_affinity = hildaIceAff;
         }
         else {
             System.out.println("Error.");
@@ -126,7 +130,7 @@ public class Hilda {
         //actual damage
         if (maybe_miss <= hildaEvasion) {
             enemyHP -= ((HPtaken * magic_affinity)/100);
-            System.out.println("The " + name_type + " loses " + HPtaken + " health points! \n");
+            System.out.println("The " + name_type + " loses " + ((HPtaken * magic_affinity)/100) + " health points! \n");
         }
         else {
             System.out.println("The " + name_type + " dodges! \n");
@@ -140,7 +144,23 @@ public class Hilda {
         }
         System.out.println("\n" + "What item would you like to use? ");
         String item_input = item_navi_input.nextLine();
-        if (item_input.equals(""))
+        Boolean found_item = false;
+        while (found_item == false) {
+            if(hildaItemList.contains(summon)) {
+                System.out.println(hildaName + " calls out to " + summon + "!");
+                String magic_type = hildaMagicListType.get(hildaMagicList.index(summon));
+                int maybe_hit = battle_hit_limit.nextInt(101);
+                if (maybe_hit <= hildaAccuracy) {
+                    enemy.enemyTakeMagicAttack(magic_type, hildaStrength/2 + 5, battle_hit_limit);
+                }
+                else {
+                    System.out.println(hildaName + " & " + summon + " miss! \n");
+                }
+            }
+            else {
+                System.out.println("Hilda doesn't know who you're looking for, but they're not here. ");
+            }
+        }
     }
     //FLEE
     public boolean hildaFlee(Random battle_flee_limit) {
