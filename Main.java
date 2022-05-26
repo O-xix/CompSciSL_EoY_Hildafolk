@@ -13,6 +13,7 @@ public class Main {
         int posXpos = 0;
         int posYpos = 0;
         Hilda hilda = new Hilda();
+        hilda.hildaItemsGive();
         Enemy troll = new Enemy();
         battle(hilda, troll);
         //hilda chara1 = pafie;
