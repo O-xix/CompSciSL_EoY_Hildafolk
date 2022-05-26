@@ -81,7 +81,7 @@ public class Enemy {
         //actual damage
         if (maybe_miss <= enemyEvasion) {
             enemyHP -= ((HPtaken * magic_affinity)/100);
-            System.out.println("The " + name_type + " loses " + HPtaken + " health points! \n");
+            System.out.println("The " + name_type + " loses " + ((HPtaken * magic_affinity)/100) + " health points! \n");
         }
         else {
             System.out.println("The " + name_type + " dodges! \n");
