@@ -41,8 +41,8 @@ public class Main {
                     System.out.println(hilda.hildaMagicList.get(i) + " :  " + hilda.hildaMagicListType.get(i));
                 }
                 System.out.println("\n" + "Who would you like to call on? ");
-                String item_input = item_navi_input.nextLine();
-                hilda.hildaMagicAttack(item_input, enemy, battle_random);
+                String summon_input = battle_input.nextLine();
+                hilda.hildaMagicAttack(summon_input, enemy, battle_random);
             }
             else if(battle_command.equals("ITEMS")) {
                 escape_menu = hilda.hildaItems(battle_input);
