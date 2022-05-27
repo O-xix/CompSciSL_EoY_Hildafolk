@@ -35,10 +35,10 @@ public class Hilda {
     int hildaGravityAff;
     int hildaDrainAff;
     //lists:
-    ArrayList<String> hildaItemList = new ArrayList<>(); 
-    ArrayList<int> hildaItemListQuantity = new ArrayList<>();
-    ArrayList<String> hildaMagicList = new ArrayList<>();
-    ArrayList<int> hildaMagicListType = new ArrayList<>();
+    ArrayList<String> hildaItemList = new ArrayList<String>(); 
+    ArrayList<Integer> hildaItemListQuantity = new ArrayList<Integer>();
+    ArrayList<String> hildaMagicList = new ArrayList<String>();
+    ArrayList<String> hildaMagicListType = new ArrayList<String>();
     //set item list and magic list
     public void hildaItemsGive() {
         //item list give
@@ -97,7 +97,7 @@ public class Hilda {
         while (found_summon == false) {
             if(hildaMagicList.contains(summon)) {
                 System.out.println(hildaName + " calls out to " + summon + "!");
-                String magic_type = hildaMagicListType.get(hildaMagicList.index(summon));
+                String magic_type = hildaMagicListType.get(hildaMagicList.indexOf(summon));
                 int maybe_hit = battle_hit_limit.nextInt(101);
                 if (maybe_hit <= hildaAccuracy) {
                     enemy.enemyTakeMagicAttack(magic_type, hildaStrength/2 + 5, battle_hit_limit);
@@ -113,7 +113,7 @@ public class Hilda {
     }
     public void hildaTakeMagicAttack(String magic_type, int HPtaken, Random battle_hit_limit) {
         int maybe_miss = battle_hit_limit.nextInt(101);
-        int magic_affinity;
+        int magic_affinity = 0;
         //find magic_affinity factor
         if(magic_type.equals("Fire")) {
             magic_affinity = hildaFireAff;
@@ -129,38 +129,68 @@ public class Hilda {
         }
         //actual damage
         if (maybe_miss <= hildaEvasion) {
-            enemyHP -= ((HPtaken * magic_affinity)/100);
-            System.out.println("The " + name_type + " loses " + ((HPtaken * magic_affinity)/100) + " health points! \n");
+            hildaHP -= ((HPtaken * magic_affinity)/100);
+            System.out.println("The " + hildaName + " loses " + ((HPtaken * magic_affinity)/100) + " health points! \n");
         }
         else {
-            System.out.println("The " + name_type + " dodges! \n");
+            System.out.println("The " + hildaName + " dodges! \n");
         }
     }
     
     //ITEMS
-    public boolean hildaItems(Scanner item_navi_input) {
+    public String hildaItems(Scanner item_navi_input) {
         for (int i = 0; i < hildaItemList.size(); i++) {
             System.out.println(hildaItemList.get(i) + " :  " + hildaItemListQuantity.get(i));
         }
         System.out.println("\n" + "What item would you like to use? ");
         String item_input = item_navi_input.nextLine();
-        Boolean found_item = false;
-        while (found_item == false) {
-            if(hildaItemList.contains(summon)) {
-                System.out.println(hildaName + " calls out to " + summon + "!");
-                String magic_type = hildaMagicListType.get(hildaMagicList.index(summon));
-                int maybe_hit = battle_hit_limit.nextInt(101);
-                if (maybe_hit <= hildaAccuracy) {
-                    enemy.enemyTakeMagicAttack(magic_type, hildaStrength/2 + 5, battle_hit_limit);
+        int restoration_excess;
+        if (item_input.equals("ESCAPE")) {
+            return item_input;
+        }
+        else {
+            for (int i = 0; i < hildaItemList.size(); i++) {
+                if (hildaItemList.get(i).equals(item_input)) {
+                    if(item_input.equals("Potion") && hildaItemListQuantity.get(i) > 0) {
+                        restoration_excess = hildaHP + 75 - hildaMaxHP;
+                        if (restoration_excess < 0) {
+                            hildaHP += 75;
+                            System.out.println(hildaName + " used a potion, and restored 75 health points.");
+                        }
+                        else {
+                            hildaHP += (75 - restoration_excess);
+                            System.out.println(hildaName + " used a potion, and restored " + (75 - restoration_excess) + " health points.");
+                        }
+                    }
+                    else if(item_input.equals("Hi-Potion") && hildaItemListQuantity.get(i) > 0) {
+                        restoration_excess = hildaHP + 125 - hildaMaxHP;
+                        if (restoration_excess < 0) {
+                            hildaHP += 125;
+                            System.out.println(hildaName + " used a hi-potion, and restored 125 health points.");
+                        }
+                        else {
+                            hildaHP += (125 - restoration_excess);
+                            System.out.println(hildaName + " used a hi-potion, and restored " + (125 - restoration_excess) + " health points.");
+                        }
+                    }
+                    else if(item_input.equals("Elixir") && hildaItemListQuantity.get(i) > 0) {
+                        restoration_excess = hildaHP + 75 - hildaMaxHP;
+                        if (restoration_excess < 0) {
+                            hildaHP += 75;
+                            System.out.println(hildaName + " used a potion, and restored 75 health points.");
+                        }
+                        else {
+                            hildaHP += (75 - restoration_excess);
+                            System.out.println(hildaName + " used a potion, and restored " + (75 - restoration_excess) + " health points.");
+                        }
+                    }
+                    else {
+                        System.out.println(hildaName + " couldn't find " + item_input + ".");
+                    }
                 }
-                else {
-                    System.out.println(hildaName + " & " + summon + " miss! \n");
-                }
-            }
-            else {
-                System.out.println("Hilda doesn't know who you're looking for, but they're not here. ");
             }
         }
+        return "";
     }
     //FLEE
     public boolean hildaFlee(Random battle_flee_limit) {
