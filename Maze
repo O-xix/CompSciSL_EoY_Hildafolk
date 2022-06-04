@@ -1,0 +1,110 @@
+import java.awt.*;
+import java.io.*;
+import java.lang.*;
+import java.net.*;
+import java.util.*;
+import javax.imageio.*;
+import javax.swing.*;
+
+/**
+ * Write a description of class Maze here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Maze {
+    String[][] maze_layout = new String[12][12];
+    DrawingPanel maze = new DrawingPanel(1440, 810);
+    public void setupRandomMaze(String[][] maze_layout) {
+        //make it empty at first
+        for (int i = 0; i < maze_layout.length; i++) {
+            for (int j = 0; j < maze_layout[i].length; j++) {
+                maze_layout[i][j] = "empty";
+            }
+        }
+        //set up bordering walls
+        for (int i = 0; i < maze_layout.length; i++) {
+            for (int j = 0; j < maze_layout[i].length; j++) {
+                if (i == 0 || i == maze_layout.length) {
+                    maze_layout[i][j] = "wall";
+                }
+                else if (j == 0 || j == maze_layout.length) {
+                    maze_layout[i][j] = "empty";
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        //set up starting and ending spaces
+        maze_layout[1][1] = "start";
+        maze_layout[10][10] = "end";
+        //set up a winning path
+        int pathx = 1;
+        int pathy = 1;
+        String current = "";
+        int direction = 0;
+        Random random = new Random();
+        while (current.equals("end")) {
+            direction = random.nextInt(3);
+            if(direction == 0 && pathx < (maze_layout.length - 1)) {
+                pathx++;
+            }
+            else if(direction == 1 && pathy < 10) {
+                pathy++;
+            }
+            else if(direction == 2 && pathx > 1) {
+                pathx--;
+            }
+            else if(direction == 3 && pathy > 1) {
+                pathy--;
+            }
+            else {
+                continue;
+            }
+            maze_layout[pathx][pathy] = "walkable";
+        }
+        //figure out the remaining spaces
+        for (int i = 0; i < maze_layout.length; i++) {
+            for (int j = 0; j < maze_layout[i].length; j++) {
+                current = maze_layout[i][j];
+                if (current.equals("empty")) {
+                    direction = random.nextInt(1);
+                    if (direction == 0) {
+                        maze_layout[i][j] = "wall";
+                    }
+                    else if (direction == 1) {
+                        maze_layout[i][j] = "walkable";
+                    }
+                }
+            }
+        }
+        //print the maze layout
+    }
+    public void visualizeMaze(String[][] maze_layout, DrawingPanel panel) {
+        Graphics maze = panel.getGraphics();
+        for (int i = 0; i < maze_layout.length; i++) {
+            for (int j = 0; j < maze_layout[i].length; j++) {
+                if (maze_layout[i][j].equals("wall")) {
+                    maze.setColor(new Color(0, 0, 0));
+                    maze.fillRect(i * 50, j * 50, 50, 50);
+                }
+                else if (maze_layout[i][j].equals("start")) {
+                    maze.setColor(new Color(255, 0, 0));
+                    maze.fillRect(i * 50, j * 50, 50, 50);
+                }
+                else if (maze_layout[i][j].equals("end")) {
+                    maze.setColor(new Color(0, 0, 255));
+                    maze.fillRect(i * 50, j * 50, 50, 50);
+                }
+                else if (maze_layout[i][j].equals("walkable")) {
+                    maze.setColor(new Color(255, 255, 255));
+                    maze.fillRect(i * 50, j * 50, 50, 50);
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+    }
+}
