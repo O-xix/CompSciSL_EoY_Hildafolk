@@ -9,32 +9,47 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         System.out.println("");
-        //DrawingPanel panel = new DrawingPanel(960, 540);
-        int posXpos = 0;
-        int posYpos = 0;
+        //Maze maze = new Maze();
+        //maze.setupRandomMaze(maze.maze_layout);
+        //maze.visualizeMaze(maze.maze_layout, maze.maze);
         Hilda hilda = new Hilda();
         hilda.hildaItemsGive();
         Enemy troll = new Enemy();
         battle(hilda, troll);
-        //hilda chara1 = pafie;
-        //pafie.hildaSpriteRefresh(panel, posXpos, posYpos);
     }
     public static void battle(Hilda hilda, Enemy enemy) {
         Scanner battle_input = new Scanner(System.in);
         Random battle_random = new Random();
         String escape_menu = "";
+        String game_over = "";
+        DrawingPanel battle = new DrawingPanel(1440, 810);
         System.out.println("The " + enemy.name_type + " nearly stepped on you! \n");
         boolean fleed = false;
         while (enemy.enemyHP > 0 && fleed == false) {
+            hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
+            enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
             //Player attack
             System.out.println("What will you do?");
-            System.out.println("    FIGHT (only working one)   MAGIC");
+            System.out.println("    FIGHT   MAGIC");
             System.out.println("    ITEMS   FLEE \n\n");
-
             String battle_command = battle_input.nextLine();
             System.out.println("\n\n");
             if(battle_command.equals("FIGHT")) {
+                /*
+                for (int i = 0; i < 300; i++) {
+                    hilda.hildaXpos -= 3;
+                    hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
+                    enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                }
+                */
                 hilda.hildaAttack(enemy, battle_random);
+                /*
+                for (int i = 0; i < 300; i++) {
+                    hilda.hildaXpos += 3;
+                    hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
+                    enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                }
+                */
             }
             else if(battle_command.equals("MAGIC")) {
                 for (int i = 0; i < hilda.hildaMagicList.size(); i++) {
@@ -52,7 +67,7 @@ public class Main {
             }
             else if(battle_command.equals("FLEE")) {
                 fleed = hilda.hildaFlee(battle_random);
-                if (fleed = true) {
+                if (fleed == true) {
                     break;
                 }
                 else {
@@ -60,11 +75,30 @@ public class Main {
                 }
             }
             else {
+                if (battle_command.equals("ADMIN ESC")) {
+                    fleed = true;
+                    break;
+                }
                 System.out.println("Error.");
                 continue;
             }
             //Enemy attack
+            /*
+            for (int i = 0; i < 300; i++) {
+                enemy.enemyXpos += 3;
+                hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
+                enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+            }
+            */
             enemy.enemyAttack(hilda, battle_random);
+            /*
+            for (int i = 0; i < 300; i++) {
+                enemy.enemyXpos -= 3;
+                hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
+                enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+            }
+            */
         }
+        System.exit(0);
     }
 }
