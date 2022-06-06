@@ -15,6 +15,8 @@ import javax.swing.*;
 public class Maze {
     String[][] maze_layout = new String[12][12];
     DrawingPanel maze = new DrawingPanel(1440, 810);
+    int currentXpos = 1;
+    int currentYpos = 1;
     public void setupRandomMaze(String[][] maze_layout) {
         //make it empty at first
         for (int i = 0; i < maze_layout.length; i++) {
@@ -25,11 +27,11 @@ public class Maze {
         //set up bordering walls
         for (int i = 0; i < maze_layout.length; i++) {
             for (int j = 0; j < maze_layout[i].length; j++) {
-                if (i == 0 || i == maze_layout.length) {
+                if (i == 0 || i == 11) {
                     maze_layout[i][j] = "wall";
                 }
-                else if (j == 0 || j == maze_layout.length) {
-                    maze_layout[i][j] = "empty";
+                else if (j == 0 || j == 11) {
+                    maze_layout[i][j] = "wall";
                 }
                 else {
                     continue;
@@ -42,12 +44,12 @@ public class Maze {
         //set up a winning path
         int pathx = 1;
         int pathy = 1;
-        String current = "";
+        String current = maze_layout[1][1];
         int direction = 0;
         Random random = new Random();
-        while (current.equals("end")) {
+        while (!(pathx == 10 && pathy == 10)) {
             direction = random.nextInt(3);
-            if(direction == 0 && pathx < (maze_layout.length - 1)) {
+            if(direction == 0 && pathx < 10) {
                 pathx++;
             }
             else if(direction == 1 && pathy < 10) {
@@ -63,13 +65,16 @@ public class Maze {
                 continue;
             }
             maze_layout[pathx][pathy] = "walkable";
+            current = maze_layout[pathx][pathy];
         }
+        //reassign last space as finish
+        maze_layout[10][10] = "end";
         //figure out the remaining spaces
         for (int i = 0; i < maze_layout.length; i++) {
             for (int j = 0; j < maze_layout[i].length; j++) {
                 current = maze_layout[i][j];
                 if (current.equals("empty")) {
-                    direction = random.nextInt(1);
+                    direction = random.nextInt(2);
                     if (direction == 0) {
                         maze_layout[i][j] = "wall";
                     }
@@ -80,6 +85,14 @@ public class Maze {
             }
         }
         //print the maze layout
+        /*
+        for (int i = 0; i < maze_layout.length; i++) {
+            for (int j = 0; j < maze_layout[i].length; j++) {
+                System.out.print(maze_layout[i][j] + ", ");
+            }
+            System.out.println();
+        }
+        */
     }
     public void visualizeMaze(String[][] maze_layout, DrawingPanel panel) {
         Graphics maze = panel.getGraphics();
@@ -90,11 +103,11 @@ public class Maze {
                     maze.fillRect(i * 50, j * 50, 50, 50);
                 }
                 else if (maze_layout[i][j].equals("start")) {
-                    maze.setColor(new Color(255, 0, 0));
+                    maze.setColor(new Color(0, 0, 255));
                     maze.fillRect(i * 50, j * 50, 50, 50);
                 }
                 else if (maze_layout[i][j].equals("end")) {
-                    maze.setColor(new Color(0, 0, 255));
+                    maze.setColor(new Color(0, 255, 0));
                     maze.fillRect(i * 50, j * 50, 50, 50);
                 }
                 else if (maze_layout[i][j].equals("walkable")) {
@@ -106,5 +119,67 @@ public class Maze {
                 }
             }
         }
+    }
+    public void changePlayerPosition(String input, String[][] maze_layout) {
+        if (input.equals("UP")) {
+            currentYpos--;
+            if (maze_layout[currentXpos][currentYpos].equals("wall")) {
+                currentYpos++;
+            }
+            else if (maze_layout[currentXpos][currentYpos].equals("end")) {
+                System.out.println("YOU WIN!");
+                System.exit(0);
+            }
+            else {
+                return;
+            }
+        }
+        else if (input.equals("DOWN")) {
+            currentYpos++;
+            if (maze_layout[currentXpos][currentYpos].equals("wall")) {
+                currentYpos--;
+            }
+            else if (maze_layout[currentXpos][currentYpos].equals("end")) {
+                System.out.println("YOU WIN!");
+                System.exit(0);
+            }
+            else {
+                return;
+            }
+        }
+        else if (input.equals("LEFT")) {
+            currentXpos--;
+            if (maze_layout[currentXpos][currentYpos].equals("wall")) {
+                currentXpos++;
+            }
+            else if (maze_layout[currentXpos][currentYpos].equals("end")) {
+                System.out.println("YOU WIN!");
+                System.exit(0);
+            }
+            else {
+                return;
+            }
+        }
+        else if (input.equals("RIGHT")) {
+            currentXpos++;
+            if (maze_layout[currentXpos][currentYpos].equals("wall")) {
+                currentXpos--;
+            }
+            else if (maze_layout[currentXpos][currentYpos].equals("end")) {
+                System.out.println("YOU WIN!");
+                System.exit(0);
+            }
+            else {
+                return;
+            }
+        }
+        else {
+            return;
+        }
+    }
+    public void visualizePlayerSpace(DrawingPanel panel) {
+        Graphics player = panel.getGraphics();
+        player.setColor(new Color(255, 0, 0));
+        player.fillRect(currentXpos * 50, currentYpos * 50, 50, 50);
     }
 }
