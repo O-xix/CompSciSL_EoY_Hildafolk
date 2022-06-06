@@ -9,13 +9,29 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         System.out.println("");
-        //Maze maze = new Maze();
-        //maze.setupRandomMaze(maze.maze_layout);
-        //maze.visualizeMaze(maze.maze_layout, maze.maze);
+        Maze maze = new Maze();
+        navigation(maze);
+    }
+    public static void navigation(Maze maze) {
+        maze.setupRandomMaze(maze.maze_layout);
+        maze.visualizeMaze(maze.maze_layout, maze.maze);
         Hilda hilda = new Hilda();
         hilda.hildaItemsGive();
         Enemy troll = new Enemy();
-        battle(hilda, troll);
+        Scanner navigation_input = new Scanner(System.in);
+        Random navi_random = new Random();
+        while (true) {
+            String navi_input = navigation_input.nextLine();
+            maze.visualizeMaze(maze.maze_layout, maze.maze);
+            maze.changePlayerPosition(navi_input, maze.maze_layout);
+            maze.visualizePlayerSpace(maze.maze);
+            if (navi_random.nextInt(3) == 1) {
+                battle(hilda, troll);
+            }
+            else {
+                continue;
+            }
+        }        
     }
     public static void battle(Hilda hilda, Enemy enemy) {
         Scanner battle_input = new Scanner(System.in);
@@ -35,21 +51,20 @@ public class Main {
             String battle_command = battle_input.nextLine();
             System.out.println("\n\n");
             if(battle_command.equals("FIGHT")) {
-                /*
                 for (int i = 0; i < 300; i++) {
                     hilda.hildaXpos -= 3;
                     hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
                 }
-                */
+                
                 hilda.hildaAttack(enemy, battle_random);
-                /*
+                
                 for (int i = 0; i < 300; i++) {
                     hilda.hildaXpos += 3;
                     hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
                 }
-                */
+                
             }
             else if(battle_command.equals("MAGIC")) {
                 for (int i = 0; i < hilda.hildaMagicList.size(); i++) {
@@ -83,22 +98,22 @@ public class Main {
                 continue;
             }
             //Enemy attack
-            /*
+            
             for (int i = 0; i < 300; i++) {
                 enemy.enemyXpos += 3;
                 hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                 enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
             }
-            */
+            
             enemy.enemyAttack(hilda, battle_random);
-            /*
+            
             for (int i = 0; i < 300; i++) {
                 enemy.enemyXpos -= 3;
                 hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                 enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
             }
-            */
+            
         }
-        System.exit(0);
+        //close window
     }
 }
