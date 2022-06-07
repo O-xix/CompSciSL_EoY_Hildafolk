@@ -15,6 +15,7 @@ public class Main {
     public static void navigation(Maze maze) {
         maze.setupRandomMaze(maze.maze_layout);
         maze.visualizeMaze(maze.maze_layout, maze.maze);
+        maze.visualizePlayerSpace(maze.maze);
         Hilda hilda = new Hilda();
         hilda.hildaItemsGive();
         Enemy troll = new Enemy();
@@ -26,7 +27,9 @@ public class Main {
             maze.changePlayerPosition(navi_input, maze.maze_layout);
             maze.visualizePlayerSpace(maze.maze);
             if (navi_random.nextInt(3) == 1) {
+                maze.maze.setVisible(false);
                 battle(hilda, troll);
+                maze.maze.setVisible(true);
             }
             else {
                 continue;
@@ -39,6 +42,7 @@ public class Main {
         String escape_menu = "";
         String game_over = "";
         DrawingPanel battle = new DrawingPanel(1440, 810);
+        System.out.println("\n\n\n\n\n________________________");
         System.out.println("The " + enemy.name_type + " nearly stepped on you! \n");
         boolean fleed = false;
         while (enemy.enemyHP > 0 && fleed == false) {
@@ -86,7 +90,7 @@ public class Main {
                     break;
                 }
                 else {
-                    continue;
+                    //continue;
                 }
             }
             else {
@@ -115,5 +119,6 @@ public class Main {
             
         }
         //close window
+        battle.setVisible(false);
     }
 }
