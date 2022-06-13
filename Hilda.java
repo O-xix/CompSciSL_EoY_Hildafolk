@@ -20,7 +20,7 @@ public class Hilda {
     //basic stats:
     int hildaLevel = 10;
     int hildaHP = 300;
-    int hildaMaxHP = 0;
+    int hildaMaxHP = 300;
     int hildaMP = 0;
     int hildaMaxMP = 0;
     int hildaStrength = 15;
@@ -29,9 +29,9 @@ public class Hilda {
     int hildaStamina = 0;
     int hildaLuck = 13;
     int hildaAttack = 0;
-    int hildaAccuracy = 15;
+    int hildaAccuracy = 50;
     int hildaDefense = 100;
-    int hildaEvasion = 48;
+    int hildaEvasion = 18;
     //spell-affinities; the greater the number, the harder the hit.
     int hildaFireAff = 110;
     int hildaIceAff = 100;
@@ -48,6 +48,291 @@ public class Hilda {
     ArrayList<String> hildaMagicList = new ArrayList<String>();
     ArrayList<String> hildaMagicListType = new ArrayList<String>();
     //set item list and magic list
+    public void hildaSpriteWhiteRefresh(DrawingPanel panel, int hildaXPos, int hildaYPos) {
+        Graphics hilda = panel.getGraphics();
+        hilda.setColor(new Color(255, 255, 255));
+                //Column 0 of Sprite (x = 0)
+        hilda.fillRect(0 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(0 + hildaXPos, 75 + hildaYPos, 5, 5);
+                //Column 1 of Sprite (x = 5)
+        hilda.fillRect(5 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 80 + hildaYPos, 5, 5);
+                //Column 2 of Sprite (x = 10)
+        hilda.fillRect(10 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 80 + hildaYPos, 5, 5);
+                //Column 3 of Sprite (x = 15)
+        hilda.fillRect(15 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 110 + hildaYPos, 5, 5);
+                //Column 4 of Sprite (x = 20)
+        hilda.fillRect(20 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 110 + hildaYPos, 5, 5);
+                //Column 5 of Sprite (x = 25)
+        hilda.fillRect(25 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 6 of Sprite (x = 30)
+        hilda.fillRect(30 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 7 of Sprite (x = 35)
+        hilda.fillRect(35 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 8 of Sprite (x = 40)
+        hilda.fillRect(40 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 9 of Sprite (x = 45)
+        hilda.fillRect(45 + hildaXPos, 0 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 10 of Sprite (x = 50)
+        hilda.fillRect(50 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 95 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 11 of Sprite (x = 55)
+        hilda.fillRect(55 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 115 + hildaYPos, 5, 5);
+                //Column 12 of Sprite (x = 60)
+        hilda.fillRect(60 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 70 + hildaYPos, 5, 5);
+                //Column 13 & 14 of Sprite (x = 65 & x = 70)
+        hilda.fillRect(65 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(65 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(70 + hildaXPos, 45 + hildaYPos, 5, 5);
+            //Light yellow, by column
+        hilda.fillRect(5 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(5 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 65 + hildaYPos, 5, 5);
+            //Light-grey yellow, by column
+        hilda.fillRect(10 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 70 + hildaYPos, 5, 5);
+            //Red 1, by column
+        hilda.fillRect(15 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 110 + hildaYPos, 5, 5);
+            //Red 2, by column
+        hilda.fillRect(15 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 70 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 110 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 90 + hildaYPos, 5, 5);
+            //Red 3, by column
+        hilda.fillRect(15 + hildaXPos, 65 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 75 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 85 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 60 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 60 + hildaYPos, 5, 5);
+            //Red 4, by column
+        hilda.fillRect(25 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 90 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 105 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 100 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 105 + hildaYPos, 5, 5);
+            //Red 4, by column
+        hilda.fillRect(25 + hildaXPos, 80 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 55 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 60 + hildaYPos, 5, 5);
+            //Gray, by column
+        hilda.fillRect(20 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 40 + hildaYPos, 5, 5);
+            //Dark blue, by column
+        hilda.fillRect(10 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(10 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 50 + hildaYPos, 5, 5);
+        hilda.fillRect(65 + hildaXPos, 45 + hildaYPos, 5, 5);
+            //Turquiose, by column
+        hilda.fillRect(10 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(15 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(20 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(25 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(35 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 5 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(40 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 35 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 40 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 30 + hildaYPos, 5, 5);
+        hilda.fillRect(55 + hildaXPos, 45 + hildaYPos, 5, 5);
+        hilda.fillRect(60 + hildaXPos, 45 + hildaYPos, 5, 5);
+            //Light blue, by column
+        hilda.fillRect(25 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 20 + hildaYPos, 5, 5);
+        hilda.fillRect(30 + hildaXPos, 25 + hildaYPos, 5, 5);
+        hilda.fillRect(45 + hildaXPos, 10 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 15 + hildaYPos, 5, 5);
+        hilda.fillRect(50 + hildaXPos, 20 + hildaYPos, 5, 5);
+    }
     public void hildaSpriteRefresh(DrawingPanel panel, int hildaXPos, int hildaYPos) {
         Graphics hilda = panel.getGraphics();
         //Making the sprite:
@@ -361,7 +646,7 @@ public class Hilda {
         //magic list give
         hildaMagicList.add(0, "Lindworm");
         hildaMagicListType.add(0, "Fire");
-        hildaMagicList.add(1, "Greela");
+        hildaMagicList.add(1, "Gryla");
         hildaMagicListType.add(1, "Ice");
         hildaMagicList.add(2, "Kraken");
         hildaMagicListType.add(2, "Water");
@@ -414,6 +699,7 @@ public class Hilda {
             }
             else {
                 System.out.println("Hilda doesn't know who you're looking for, but they're not here. ");
+                return;
             }
         }
     }
@@ -475,6 +761,7 @@ public class Hilda {
                             hildaHP += (75 - restoration_excess);
                             System.out.println(hildaName + " used a potion, and restored " + (75 - restoration_excess) + " health points.");
                         }
+                        hildaItemListQuantity.set(i, (hildaItemListQuantity.get(i) - 1));
                     }
                     else if(item_input.equals("Hi-Potion") && hildaItemListQuantity.get(i) > 0) {
                         restoration_excess = hildaHP + 125 - hildaMaxHP;
@@ -486,6 +773,7 @@ public class Hilda {
                             hildaHP += (125 - restoration_excess);
                             System.out.println(hildaName + " used a hi-potion, and restored " + (125 - restoration_excess) + " health points.");
                         }
+                        hildaItemListQuantity.set(i, (hildaItemListQuantity.get(i) - 1));
                     }
                     else if(item_input.equals("Elixir") && hildaItemListQuantity.get(i) > 0) {
                         restoration_excess = hildaHP + 75 - hildaMaxHP;
@@ -497,6 +785,7 @@ public class Hilda {
                             hildaHP += (75 - restoration_excess);
                             System.out.println(hildaName + " used a elixir, and restored " + (150 - restoration_excess) + " health points.");
                         }
+                        hildaItemListQuantity.set(i, (hildaItemListQuantity.get(i) - 1));
                     }
                     else {
                         System.out.println(hildaName + " couldn't find " + item_input + ".");
