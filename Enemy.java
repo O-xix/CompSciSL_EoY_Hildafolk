@@ -18,13 +18,13 @@ public class Enemy {
     int enemyYpos = 405;
     //basic stats
     int enemyHP = 1000;
-    int enemyStrength = 10;
+    int enemyStrength = 200;
     int enemyIntellect;
     int enemyDefense;
     int enemyMagicDefense;
     int enemyAgility;
-    int enemyAccuracy = 15;
-    int enemyEvasion = 48;
+    int enemyAccuracy = 55;
+    int enemyEvasion = 18;
     //spell-affinities
     int enemyFireAff;
     int enemyIceAff;
@@ -35,6 +35,26 @@ public class Enemy {
     int enemyDarkAff;
     int enemyGravityAff;
     int enemyDrainAff;
+    public void enemySpriteWhiteRefresh(DrawingPanel panel, int enemyXPos, int enemyYPos) {
+        Graphics enemy = panel.getGraphics();
+        enemy.setColor(new Color(255, 255, 255));
+        enemy.fillRect(10 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 20 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 40 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(20 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(20 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(30 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(30 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(40 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(40 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 20 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 40 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 50 + enemyYPos, 10, 10);
+    }
     public void enemySpriteRefresh(DrawingPanel panel, int enemyXPos, int enemyYPos) {
         Graphics enemy = panel.getGraphics();
         //enemy.setColor(new Color(255, 255, 255));
@@ -43,11 +63,19 @@ public class Enemy {
         enemy.fillRect(10 + enemyXPos, 10 + enemyYPos, 10, 10);
         enemy.fillRect(10 + enemyXPos, 20 + enemyYPos, 10, 10);
         enemy.fillRect(10 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 40 + enemyYPos, 10, 10);
+        enemy.fillRect(10 + enemyXPos, 50 + enemyYPos, 10, 10);
         enemy.fillRect(20 + enemyXPos, 10 + enemyYPos, 10, 10);
-        enemy.fillRect(20 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(20 + enemyXPos, 50 + enemyYPos, 10, 10);
         enemy.fillRect(30 + enemyXPos, 10 + enemyYPos, 10, 10);
-        enemy.fillRect(30 + enemyXPos, 20 + enemyYPos, 10, 10);
-        enemy.fillRect(30 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(30 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(40 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(40 + enemyXPos, 50 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 10 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 20 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 30 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 40 + enemyYPos, 10, 10);
+        enemy.fillRect(50 + enemyXPos, 50 + enemyYPos, 10, 10);
     }
     public void enemyAttack(Hilda hilda, Random battle_hit_limit) {
         System.out.println("The " + name_type + " attacks!");
