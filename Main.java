@@ -13,6 +13,7 @@ public class Main {
         navigation(maze);
     }
     public static void navigation(Maze maze) {
+        System.out.println("Navigate the maze and reach the end. (Controls: UP, DOWN, LEFT, RIGHT) ");
         maze.setupRandomMaze(maze.maze_layout);
         maze.visualizeMaze(maze.maze_layout, maze.maze);
         maze.visualizePlayerSpace(maze.maze);
@@ -56,17 +57,21 @@ public class Main {
             System.out.println("\n\n");
             if(battle_command.equals("FIGHT")) {
                 for (int i = 0; i < 300; i++) {
+                    hilda.hildaSpriteWhiteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     hilda.hildaXpos -= 3;
                     hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                    battle.sleep(2);
                 }
                 
                 hilda.hildaAttack(enemy, battle_random);
                 
                 for (int i = 0; i < 300; i++) {
+                    hilda.hildaSpriteWhiteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     hilda.hildaXpos += 3;
                     hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                     enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                    battle.sleep(2);
                 }
                 
             }
@@ -76,7 +81,11 @@ public class Main {
                 }
                 System.out.println("\n" + "Who would you like to call on? ");
                 String summon_input = battle_input.nextLine();
+                System.out.println("\n\n\n\n\n");
                 hilda.hildaMagicAttack(summon_input, enemy, battle_random);
+                if (escape_menu.equals("ESCAPE")) {
+                    continue;
+                }
             }
             else if(battle_command.equals("ITEMS")) {
                 escape_menu = hilda.hildaItems(battle_input);
@@ -104,17 +113,21 @@ public class Main {
             //Enemy attack
             
             for (int i = 0; i < 300; i++) {
+                enemy.enemySpriteWhiteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
                 enemy.enemyXpos += 3;
                 hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                 enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                battle.sleep(2);
             }
             
             enemy.enemyAttack(hilda, battle_random);
             
             for (int i = 0; i < 300; i++) {
+                enemy.enemySpriteWhiteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
                 enemy.enemyXpos -= 3;
                 hilda.hildaSpriteRefresh(battle, hilda.hildaXpos, hilda.hildaYpos);
                 enemy.enemySpriteRefresh(battle, enemy.enemyXpos, enemy.enemyYpos);
+                battle.sleep(2);
             }
             
         }
